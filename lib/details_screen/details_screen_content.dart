@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smart_home/details_screen/widgets/first_container.dart';
 import 'package:smart_home/details_screen/widgets/fourth_container.dart';
 import 'package:smart_home/details_screen/widgets/header.dart';
 import 'package:smart_home/details_screen/widgets/second_container.dart';
 import 'package:smart_home/details_screen/widgets/third_container.dart';
+import 'package:smart_home/home_screen/home_screen_view.dart';
 import 'package:smart_home/models/home_model.dart';
 
 class DetailsScreenContent extends StatelessWidget {
@@ -52,7 +54,11 @@ class DetailsScreenContent extends StatelessWidget {
               SizedBox(height: 2.h,),
               InkWell(
                 onTap: () {
-                  Navigator.pop(context);
+                 Navigator.push(context,
+                     MaterialPageRoute(
+                         builder:(context)=>const HomeScreenView().animate().fadeIn(duration: 800.ms,curve: Curves.easeInOut),
+                     ),
+                 );
                 },
                 child: Row(
                   children: [
