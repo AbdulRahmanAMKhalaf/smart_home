@@ -6,7 +6,7 @@ part 'indecators_state.dart';
 class IndecatorsBloc extends Bloc<IndecatorsEvent, IndecatorsState> {
   IndecatorsBloc() : super(IndecatorsInitialState()) {
     on<ChangeIndecoters>(_changeIndecators);
-    on<DragItem>(_DragItem);
+    on<DragItem>(_dragItem);
   }
   int index=0;
   int changeIndesing(int previous){
@@ -20,9 +20,9 @@ class IndecatorsBloc extends Bloc<IndecatorsEvent, IndecatorsState> {
     emit(ChangeIndecatorsSuccessfully());
   }
 
-  FutureOr<void> _DragItem(DragItem event, Emitter<IndecatorsState> emit) {
+  FutureOr<void> _dragItem(DragItem event, Emitter<IndecatorsState> emit) {
     emit(DaragLoading());
-    isDrag=true;
+    isDrag=!isDrag;
     emit(DaragSuccessfully());
   }
 }
