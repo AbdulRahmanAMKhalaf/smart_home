@@ -19,7 +19,6 @@ class _HomeScreenContentState extends State<HomeScreenContent> with TickerProvid
   @override
   Widget build(BuildContext context) {
     var bloc = context.read<IndecatorsBloc>();
-    CarouselController controller = CarouselController();
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -44,7 +43,6 @@ class _HomeScreenContentState extends State<HomeScreenContent> with TickerProvid
             height: 3.h,
           ),
           CarouselSlider(
-            carouselController: controller,
             items: List.generate(
               homeList.length,
               (index) {
@@ -74,29 +72,34 @@ class _HomeScreenContentState extends State<HomeScreenContent> with TickerProvid
                       builder: (context, state) {
                         return Stack(
                           children: [
-                            bloc.isDrag?Container(
+                           ( bloc.isDrag && index==bloc.index)?Container(
                               width: double.infinity,
                               height: 62.h,
                               decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
+                                  color: Colors.black.withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(20.px)),
+                              child: Padding(
+                                padding:  EdgeInsets.only(bottom: 25.px),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text('Click here\nfor more details',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25.px,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.grey
+                                  ),
+                                  ),
+                                ),
+                              ),
                             ).animate(controller: AnimationController(vsync: this,reverseDuration: 800.ms),).slideY(duration: 800.ms,begin: 0,end: 0.03):Container(
                               width: double.infinity,
-                              height: 10.h,
+                              height: 62.h,
                               decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(0.9),
+                                  color: Color.fromRGBO(49, 56, 64, 0.99.px),
                                   borderRadius: BorderRadius.circular(20.px)),
-                              child: Center(
-                                child: Text('Click Here\n for more details',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 55.px,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                ).animate().shake().then().scale(),
-                              ),
                             ),
-                           bloc.isDrag?Stack(
+                            ( bloc.isDrag && index==bloc.index)?Stack(
                               alignment: Alignment.bottomCenter,
                               children: [
                                 Container(
@@ -186,7 +189,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> with TickerProvid
                                     duration: 1500.ms,
                                     color: Colors.white),
                               ],
-                            ).animate(controller: AnimationController(vsync: this,reverseDuration: 800.ms)).slideY(duration: 800.ms,begin: 0,end: -0.2):Stack(
+                            ).animate(controller: AnimationController(vsync: this,reverseDuration: 800.ms)).slideY(duration: 800.ms,begin: 0,end: -0.3):Stack(
                              alignment: Alignment.bottomCenter,
                              children: [
                                Container(
